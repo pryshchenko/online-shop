@@ -1,29 +1,33 @@
 import { useState } from "react";
 
-const PizzaBlock = ({name, cost, ...all}) => {
-  let [amount, setAmount] = useState(0)
-  
+export const PizzaBlock = ({title, price, imageUrl, types, sizes}) => {
+  const typeNames = ['тонкое', 'традиционное']
+  const [amount, setAmount] = useState(0)
+  const [activeSize, setActiveSize] = useState(0)
+  const [typeName, setTypeName] = useState(0)
   return (
     <div className="pizza-block">
   <img
     className="pizza-block__image"
-    src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+    src={imageUrl}
     alt="Pizza"
   />
-  <h4 className="pizza-block__title">{name}</h4>
+  <h4 className="pizza-block__title">{title}</h4>
   <div className="pizza-block__selector">
     <ul>
-      <li className="active">тонкое</li>
-      <li>традиционное</li>
+      {types.map((type, i) => (
+      <li key={i} onClick={() => setTypeName(prev => prev = type)} className={typeName === i ? 'active' : ''}>{typeNames[type]}</li>
+      ))}
+
     </ul>
     <ul>
-      <li className="active">26 см.</li>
-      <li>30 см.</li>
-      <li>40 см.</li>
+      {sizes.map((size, i) => (
+        <li key={i} onClick={() => setActiveSize(prev => prev = i)} className={activeSize === i ? 'active' : ''}>{size} см.</li>
+      ))}
     </ul>
   </div>
   <div className="pizza-block__bottom">
-    <div className="pizza-block__price">{cost} ₴</div>
+    <div className="pizza-block__price">{price} ₴</div>
     <button className="button button--outline button--add" onClick={() => setAmount(prev => prev + 1)}>
       <span>Добавить</span>
       <i>{amount}</i>
@@ -35,5 +39,3 @@ const PizzaBlock = ({name, cost, ...all}) => {
 </div>
   );
 }
-
-export default PizzaBlock;
