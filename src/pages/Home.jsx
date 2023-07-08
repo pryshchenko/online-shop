@@ -8,7 +8,7 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 // import pizzas from "../pizzas.json";
 
 
-export const Home = () => {
+export const Home = ({ searchText }) => {
 const [items, setItems] = useState([])
 const [isLoading, SetIsLoading] = useState(true)
 const [activeIndex, setActiveIndex] = useState(0)
@@ -44,7 +44,7 @@ useEffect(() => {
     <div className="content__items">
       {isLoading 
       ? [...new Array(12)].map((_, index) => <Skeleton key={index} />) 
-      : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />) }
+      : items.filter(obj => obj.title.toLowerCase().includes(searchText.toLowerCase())).map((obj) => <PizzaBlock key={obj.id} {...obj} />) }
     </div>
   </>
     

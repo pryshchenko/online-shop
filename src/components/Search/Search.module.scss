@@ -23,3 +23,17 @@
   left: 12px;
   top: 12px;
 }
+
+.closeInput {
+  width: 25px;
+  height: 25px;
+  opacity: 0.3;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
