@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SearchContext } from "../App";
 
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
@@ -8,7 +9,8 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 // import pizzas from "../pizzas.json";
 
 
-export const Home = ({ searchText }) => {
+export const Home = () => {
+const { searchText } = useContext(SearchContext)
 const [items, setItems] = useState([])
 const [isLoading, SetIsLoading] = useState(true)
 const [activeIndex, setActiveIndex] = useState(0)
