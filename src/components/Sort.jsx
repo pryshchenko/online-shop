@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 export const Sort = ({ value, onSelectedSort }) => {
   const [openSort, setOpenSort] = useState(false)
+  
   const listSort = [
     {name: 'популярности(убыв)',
      sortProperty: 'rating'
@@ -21,6 +23,7 @@ export const Sort = ({ value, onSelectedSort }) => {
      sortProperty: '-title'
     },
   ]
+  
   return (
     <div className="sort">
               <div className="sort__label">

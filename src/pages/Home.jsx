@@ -1,23 +1,22 @@
-import { useState, useEffect, useContext } from "react";
-import { SearchContext } from "../App";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategoryId, setSelectedSort } from "../redux/slices/filterSlice";
 
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
 import { PizzaBlock } from "../components/PizzaBlock";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 
-// import pizzas from "../pizzas.json";
-
-
 export const Home = () => {
-const { searchText } = useContext(SearchContext)
+const categoryId = useSelector(state => state.filter.categoryId)
+const searchText = useSelector(state => state.filter.searchText)
+const selectedSort = useSelector(state => state.filter.sort)
+
+const dispatch = useDispatch()
+
 const [items, setItems] = useState([])
 const [isLoading, SetIsLoading] = useState(true)
-const [activeIndex, setActiveIndex] = useState(0)
-const [selectedSort, setSelectedSort] = useState({
-  name: 'популярности(убыв)',
-  sortProperty: 'rating'
-})
+
 
 
 useEffect(() => {
@@ -25,7 +24,7 @@ useEffect(() => {
 
   const sortBy = selectedSort.sortProperty.replace('-', '');
   const order = selectedSort.sortProperty.includes('-') ? 'asc' : 'desc';
-  const category = activeIndex > 0 ? `category=${activeIndex}` : '';
+  const category = categoryId > 0 ? `category=${categoryId}` : '';
 
   fetch(`https://64a5eb7500c3559aa9c046a9.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
   .then(res => res.json())
@@ -34,13 +33,13 @@ useEffect(() => {
     SetIsLoading(false)
   })
   window.scrollTo(0, 0);
-}, [activeIndex, selectedSort])
+}, [categoryId, selectedSort])
 
   return (
   <>
     <div className="content__top">
-      <Categories value={activeIndex} onClickIndex={(i) => setActiveIndex(prev => prev = i)} />
-      <Sort value={selectedSort} onSelectedSort={(i) => setSelectedSort(prev => prev = i)} />
+      <Categories value={categoryId} onClickIndex={(i) => dispatch(setCategoryId(i)) } />
+      <Sort value={selectedSort} onSelectedSort={(obj) => dispatch(setSelectedSort(obj)) } />
     </div>
     <h2 className="content__title">Все пиццы</h2>
     <div className="content__items">
