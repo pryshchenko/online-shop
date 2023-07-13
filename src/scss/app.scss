@@ -4,7 +4,7 @@
 @import 'components/all';
 
 body {
-  background-color: $background;
+  background: rgb(54, 54, 53);
 }
 
 .wrapper {
@@ -24,6 +24,11 @@ body {
 .content {
   padding: 40px 0;
   width: 100%;
+
+  @media (max-width: 730px) {
+    padding: 0;
+  }
+
   &__title {
     margin: 35px 0;
     font-weight: 800;
@@ -35,7 +40,7 @@ body {
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 11px;
 
     @media (max-width: 1400px) {
