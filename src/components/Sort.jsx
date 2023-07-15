@@ -1,28 +1,29 @@
 import { useState } from "react";
 
+export const listSort = [
+  {name: 'популярности(убыв)',
+   sortProperty: 'rating'
+  },
+  {name: 'популярности(возр)',
+   sortProperty: '-rating'
+  },
+  {name: 'цене(убыв)',
+   sortProperty: 'price'
+  },
+  {name: 'цене(возр)',
+   sortProperty: '-price'
+  },
+  {name: 'алфавиту(убыв)',
+   sortProperty: 'title'
+  },
+  {name: 'алфавиту(возр)',
+   sortProperty: '-title'
+  },
+]
+
 export const Sort = ({ value, onSelectedSort }) => {
   const [openSort, setOpenSort] = useState(false)
   
-  const listSort = [
-    {name: 'популярности(убыв)',
-     sortProperty: 'rating'
-    },
-    {name: 'популярности(возр)',
-     sortProperty: '-rating'
-    },
-    {name: 'цене(убыв)',
-     sortProperty: 'price'
-    },
-    {name: 'цене(возр)',
-     sortProperty: '-price'
-    },
-    {name: 'алфавиту(убыв)',
-     sortProperty: 'title'
-    },
-    {name: 'алфавиту(возр)',
-     sortProperty: '-title'
-    },
-  ]
   
   return (
     <div className="sort">

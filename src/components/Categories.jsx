@@ -1,5 +1,5 @@
     export const Categories = ({ value, onClickIndex }) => {
-    const categories  = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Остраые', 'Закрытые']
+    const categories  = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые']
     return (
     <div className="categories">
     <ul>

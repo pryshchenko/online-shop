@@ -1,20 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategoryId, setSelectedSort, setCurrentPage } from "../redux/slices/filterSlice";
 import axios from "axios";
+import qs from 'qs'
+import { useNavigate } from 'react-router-dom'
+
+import { setCategoryId, setSelectedSort, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
 
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
 import { PizzaBlock } from "../components/PizzaBlock";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
+import { listSort } from '../components/Sort'
 
 export const Home = () => {
   
 const { categoryId, searchText, selectedSort, currentPage } = useSelector(state => state.filter)
 
 const dispatch = useDispatch()
+const navigate = useNavigate()
 
+const isSearch = useRef(false);
+const isMounted = useRef(false);
 const [items, setItems] = useState([])
 const [isLoading, setIsLoading] = useState(true)
 
@@ -22,8 +29,7 @@ const onChangePage = number => {
   dispatch(setCurrentPage(number))
 }
 
-
-useEffect(() => {
+const fetchPizzas = () => {
   setIsLoading(true)
 
   const sortBy = selectedSort.sortProperty.replace('-', '');
@@ -36,9 +42,51 @@ useEffect(() => {
     setItems(res.data)
     setIsLoading(false)
   })
-  
+}
+
+useEffect(() => {
+  if (isMounted.current) {
+    console.log(1)
+    const queryString = qs.stringify({
+      sortProperty: selectedSort.sortProperty,
+      categoryId,
+      currentPage,
+      searchText
+    });
+
+    navigate(`?${queryString}`);
+  }
+  isMounted.current = true;
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [categoryId, selectedSort.sortProperty, searchText, currentPage])
+
+  useEffect(() => {
+  if (window.location.search) {
+    console.log(2)
+    const params = qs.parse(window.location.search.substring(1));
+    console.log(params)
+    const selectedSort = listSort.find((obj) => obj.sortProperty === params.sortProperty);
+    dispatch(
+      setFilters({
+        ...params,
+        selectedSort,
+      }),
+    );
+    isSearch.current = true;
+  }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+  useEffect(() => {
   window.scrollTo(0, 0);
-}, [categoryId, selectedSort, searchText, currentPage])
+  console.log(3)
+  if (!isSearch.current) {
+    fetchPizzas();
+  }
+
+  isSearch.current = false;
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [categoryId, selectedSort.sortProperty, searchText, currentPage]);
 
   return (
   <>
