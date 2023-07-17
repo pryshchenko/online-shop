@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const listSort = [
   {name: 'популярности(убыв)',
@@ -21,12 +21,36 @@ export const listSort = [
   },
 ]
 
+
+
 export const Sort = ({ value, onSelectedSort }) => {
   const [openSort, setOpenSort] = useState(false)
-  
+  const sortRef = useRef()
+
+  useEffect(() => {
+    const handleClick = event => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setOpenSort(false)
+      }
+    }
+
+    const handleEsc = event => {
+      if (event.code === "Escape") {
+        setOpenSort(false)
+      }
+    }
+
+    document.body.addEventListener('click', handleClick)
+    document.body.addEventListener('keydown', handleEsc)
+
+    return () => {
+      document.body.removeEventListener('click', handleClick)
+      document.body.removeEventListener('keydown', handleEsc)
+    }
+  }, [])
   
   return (
-    <div className="sort">
+    <div className="sort" ref={sortRef}>
               <div className="sort__label">
                 <svg
                   width="10"

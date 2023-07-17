@@ -46,7 +46,6 @@ const fetchPizzas = () => {
 
 useEffect(() => {
   if (isMounted.current) {
-    console.log(1)
     const queryString = qs.stringify({
       sortProperty: selectedSort.sortProperty,
       categoryId,
@@ -62,9 +61,7 @@ useEffect(() => {
 
   useEffect(() => {
   if (window.location.search) {
-    console.log(2)
     const params = qs.parse(window.location.search.substring(1));
-    console.log(params)
     const selectedSort = listSort.find((obj) => obj.sortProperty === params.sortProperty);
     dispatch(
       setFilters({
@@ -79,7 +76,6 @@ useEffect(() => {
 
   useEffect(() => {
   window.scrollTo(0, 0);
-  console.log(3)
   if (!isSearch.current) {
     fetchPizzas();
   }
