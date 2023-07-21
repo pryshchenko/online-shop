@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import qs from 'qs'
 import { useNavigate } from 'react-router-dom'
 
+import { pizzaFetch } from '../redux/slices/pizzaSlice'
 import { setCategoryId, setSelectedSort, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
 
 import { Categories } from "../components/Categories";
@@ -16,32 +16,32 @@ import { listSort } from '../components/Sort'
 export const Home = () => {
   
 const { categoryId, searchText, selectedSort, currentPage } = useSelector(state => state.filter)
-
+const { items, status } = useSelector(state => state.pizza)
 const dispatch = useDispatch()
 const navigate = useNavigate()
 
 const isSearch = useRef(false);
 const isMounted = useRef(false);
-const [items, setItems] = useState([])
-const [isLoading, setIsLoading] = useState(true)
 
 const onChangePage = number => {
   dispatch(setCurrentPage(number))
 }
 
-const fetchPizzas = () => {
-  setIsLoading(true)
-
+const getPizzas = () => {
   const sortBy = selectedSort.sortProperty.replace('-', '');
   const order = selectedSort.sortProperty.includes('-') ? 'asc' : 'desc';
   const category = categoryId > 0 ? `category=${categoryId}` : '';
   const search = searchText ? `search=${searchText}` : '';
 
-  axios.get(`https://64a5eb7500c3559aa9c046a9.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`)
-  .then(res => {
-    setItems(res.data)
-    setIsLoading(false)
-  })
+  dispatch(pizzaFetch({
+    sortBy,
+    order,
+    category,
+    search,
+    currentPage,
+  }))
+
+  window.scrollTo(0, 0);
 }
 
 useEffect(() => {
@@ -75,9 +75,8 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
-  window.scrollTo(0, 0);
   if (!isSearch.current) {
-    fetchPizzas();
+    getPizzas();
   }
 
   isSearch.current = false;
@@ -92,7 +91,7 @@ useEffect(() => {
     </div>
     <h2 className="content__title">Все пиццы</h2>
     <div className="content__items">
-      {isLoading 
+      {status === 'loading' 
       ? [...new Array(4)].map((_, index) => <Skeleton key={index} />) 
       : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />) }
     </div>
