@@ -9,9 +9,9 @@ const totalCount = items.reduce((sum, item) => sum + item.count, 0)
   return (
     <div className="header">
         <div className="container">
-          <Link to="/">
+          <Link to="/pizza-shop">
             <div className="header__logo">
-              <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
+              <img width="38" src="pizza-shop/img/pizza-logo.svg" alt="Pizza logo!" />
               <div>
                 <h1>Mukache - Pizza</h1>
                 <p>Найсмачніша піца в місті</p>
@@ -20,7 +20,7 @@ const totalCount = items.reduce((sum, item) => sum + item.count, 0)
           </Link>
           <Search />
           <div className="header__cart">
-            <Link to="/cart" className="button button--cart">
+            <Link to="/pizza-shop/cart" className="button button--cart">
               <span>{totalPrice} ₴</span>
               <div className="button__delimiter"></div>
               <svg
