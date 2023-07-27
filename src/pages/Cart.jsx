@@ -1,19 +1,29 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearItems } from '../redux/slices/cartSlice'
+import { clearItems, setFinishShopping } from '../redux/slices/cartSlice'
 
 import CartItem from "../components/CartItem";
 import CartEmpty from "../components/CartEmpty";
+import FinishShopping from "../components/FinishShopping"
 
 export const Cart = () => {
   const dispatch = useDispatch()
-  const { items, totalPrice } = useSelector(state => state.cart)
+  const { items, totalPrice, finishShopping} = useSelector(state => state.cart)
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
   
   const onClickClear = () => {
-    if(window.confirm('Очистить корзину?')) {
+    if(window.confirm('Очистити корзину?')) {
       dispatch(clearItems())
     }
+  }
+
+  const onClickFinish = () => {
+    dispatch(setFinishShopping(true)) 
+    dispatch(clearItems())
+  }
+
+  if (finishShopping) {
+    return <FinishShopping />
   }
 
   if (!totalPrice) {
@@ -37,7 +47,7 @@ export const Cart = () => {
 <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
-                <span>Очистить корзину</span>
+                <span>Очистити корзину</span>
               </div>
             </div>
             <div className="content__items">
@@ -45,8 +55,8 @@ export const Cart = () => {
             </div>
             <div className="cart__bottom">
               <div className="cart__bottom-details">
-                <span> Всего пицц: <b>{totalCount} шт.</b> </span>
-                <span> Сумма заказа: <b>{totalPrice} ₴</b> </span>
+                <span> Всього піц: <b>{totalCount} шт.</b> </span>
+                <span> Сума замовлення: <b>{totalPrice} ₴</b> </span>
               </div>
               <div className="cart__bottom-buttons">
                 <Link to="/pizza-shop" className="button button--outline button--add go-back-btn">
@@ -54,11 +64,11 @@ export const Cart = () => {
                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
 
-                  <span>Вернуться назад</span>
+                  <span>Повернутися на головну</span>
                 </Link>
-                <div className="button pay-btn">
-                  <span>Оплатить сейчас</span>
-                </div>
+                <button onClick={onClickFinish} className="button pay-btn">
+                  <span>Оплатити зараз</span>
+                </button>
               </div>
             </div>
           </div>

@@ -11,10 +11,10 @@ const totalCount = items.reduce((sum, item) => sum + item.count, 0)
         <div className="container">
           <Link to="/pizza-shop">
             <div className="header__logo">
-              <img width="38" src="pizza-shop/img/pizza-logo.svg" alt="Pizza logo!" />
+              <img width="38" src="img/pizza-logo.svg" alt="Pizza logo!" />
               <div>
-                <h1>Mukache - Pizza</h1>
-                <p>Найсмачніша піца в місті</p>
+                <h1>Pet-Pizza</h1>
+                <p>Найсмачніша піца у гітхабі</p>
               </div>
             </div>
           </Link>

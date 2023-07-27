@@ -1,22 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 
 export const listSort = [
-  {name: 'популярности(убыв)',
+  {name: 'За рейтингом (спад)',
    sortProperty: 'rating'
   },
-  {name: 'популярности(возр)',
+  {name: 'За рейтингом (зростаюче)',
    sortProperty: '-rating'
   },
-  {name: 'цене(убыв)',
+  {name: 'Від дорогих до дешевих',
    sortProperty: 'price'
   },
-  {name: 'цене(возр)',
+  {name: 'Від дешевих до дорогих',
    sortProperty: '-price'
   },
-  {name: 'алфавиту(убыв)',
+  {name: 'алфавіту (спад)',
    sortProperty: 'title'
   },
-  {name: 'алфавиту(возр)',
+  {name: 'алфавіту (зростаюче)',
    sortProperty: '-title'
   },
 ]
@@ -64,7 +64,7 @@ export const Sort = ({ value, onSelectedSort }) => {
                     fill="#2C2C2C"
                   />
                 </svg>
-                <b>Сортировка по:</b>
+                <b>Сортування за:</b>
                 <span onClick={() => setOpenSort(prev => !prev)}>{value.name}</span>
               </div>
              {

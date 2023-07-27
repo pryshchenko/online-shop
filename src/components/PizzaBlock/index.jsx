@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { addItem, removeItem } from '../../redux/slices/cartSlice'
 
-const typeNames = ['тонкое', 'традиционное']
+const typeNames = ['тонке', 'традиційне']
 
 export const PizzaBlock = ({title, price, imageUrl, types, sizes, id}) => {
   const [activeSize, setActiveSize] = useState(0)
@@ -53,11 +53,11 @@ export const PizzaBlock = ({title, price, imageUrl, types, sizes, id}) => {
   <div className="pizza-block__bottom">
     <div className="pizza-block__price">{price} ₴</div>
     <button className="button button--outline button--add" onClick={onClickAdd}>
-      <span>Добавить</span>
+      <span>Додати</span>
         {addedCount > 0 && <i>{addedCount}</i>}
     </button>
     {addedCount ? <button className="button button--outline button--add" onClick={onClickRemove}>
-      <span>Убрать</span>
+      <span>Прибрати</span>
     </button> : null}
   </div>
 </div>

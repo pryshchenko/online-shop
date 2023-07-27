@@ -11,7 +11,7 @@ const CartItem = ({ id, title, price, count, imageUrl, type, size }) => {
   }
 
   const onClickRemove = () => {
-    if (window.confirm(`Ты действительно хочешь удалить "${title}" в кол-ве ${count}шт ?`)) {
+    if (window.confirm(`Ви дійсно хочете видалити "${title}" у кількості ${count}шт ?`)) {
       dispatch(removeItems(id))
     }
   }
