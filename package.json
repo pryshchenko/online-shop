@@ -2,7 +2,7 @@
   "name": "online_shop",
   "version": "0.1.0",
   "private": true,
-  "homepage": "pryshchenko.github.io/pizza-shop",
+  "homepage": "https://pryshchenko.github.io/pizza-shop/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
