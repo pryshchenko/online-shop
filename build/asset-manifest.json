@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/pryshchenko.github.io/pizza-shop/static/css/main.910cd98e.css",
-    "main.js": "/pryshchenko.github.io/pizza-shop/static/js/main.84e52118.js",
-    "index.html": "/pryshchenko.github.io/pizza-shop/index.html",
-    "main.910cd98e.css.map": "/pryshchenko.github.io/pizza-shop/static/css/main.910cd98e.css.map",
-    "main.84e52118.js.map": "/pryshchenko.github.io/pizza-shop/static/js/main.84e52118.js.map"
+    "main.css": "/pizza-shop/static/css/main.f9447c59.css",
+    "main.js": "/pizza-shop/static/js/main.a30216cf.js",
+    "index.html": "/pizza-shop/index.html",
+    "main.f9447c59.css.map": "/pizza-shop/static/css/main.f9447c59.css.map",
+    "main.a30216cf.js.map": "/pizza-shop/static/js/main.a30216cf.js.map"
   },
   "entrypoints": [
-    "static/css/main.910cd98e.css",
-    "static/js/main.84e52118.js"
+    "static/css/main.f9447c59.css",
+    "static/js/main.a30216cf.js"
   ]
 }

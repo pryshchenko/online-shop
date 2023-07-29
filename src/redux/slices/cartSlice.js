@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { getCartFromLS } from '../../utils/getCartFromLS'
+
+const {items, totalPrice} = getCartFromLS()
 
 const initialState = {
-  items: [],
-  totalPrice: 0,
+  items,
+  totalPrice,
   finishShopping: false,
 }
 
@@ -67,6 +70,6 @@ const cartSlice = createSlice({
   }
 });
 
-export const { addItem, removeItem, clearItems, removeItems, removeItemCart, setFinishShopping} = cartSlice.actions;
+export const { addItem, removeItem, clearItems, removeItems, removeItemCart, setFinishShopping } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import Search from "./Search";
@@ -6,6 +7,15 @@ export const Header = () => {
 const { items , totalPrice } = useSelector(state => state.cart)
 const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 const location = useLocation()
+const isMounted = useRef(false)
+
+useEffect(() => {
+if (isMounted.current) {
+  const json = JSON.stringify(items)
+  localStorage.setItem('cart', json)
+}
+isMounted.current = true;
+}, [items])
 
   return (
     <div className="header">

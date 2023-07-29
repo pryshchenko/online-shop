@@ -45,12 +45,15 @@
     text-align: center;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: 0.2s all;
+    transition: 0.1s all;
     color: #fff;
 
     &:hover,
     &:active {
       background-color: #414040;
+    }
+    &:active {
+      transform: translateY(2px);
     }
   }
 }
