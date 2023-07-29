@@ -15,8 +15,8 @@ const resetCart = () => {
       <h2>Дякую за замовлення!<icon>😊</icon></h2>
       <p>За хвилину ви отримаєте Ваше замовлення!</p>
       <img src="img\finish-shopping.png" alt="Empty cart" />
-      <Link onClick={resetCart} to="/pizza-shop" className={styles.button}>
-      <span>Повернутися на головну</span>
+      <Link onClick={resetCart} to="/pizza-shop">
+      <button className={styles.button}>Повернутися на головну</button>
       </Link>
     </div>
   )
